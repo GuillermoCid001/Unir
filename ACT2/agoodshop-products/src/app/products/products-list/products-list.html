@@ -1,0 +1,13 @@
+<h2 class="mb-4 text-center">Catálogo de Productos ({{ products().length }} encontrados)</h2>
+
+<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+  <div class="col" *ngFor="let product of products()">
+    <app-product-card [product]="product"></app-product-card>
+  </div>
+  
+  <div class="col-12" *ngIf="products().length === 0">
+    <div class="alert alert-warning text-center" role="alert">
+      No se encontraron productos que coincidan con los filtros.
+    </div>
+  </div>
+</div>

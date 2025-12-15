@@ -1,0 +1,70 @@
+<div class="card shadow mb-4">
+  <div class="card-header bg-primary text-white">
+    <h3 class="h5 mb-0"> Dar de Alta Nuevo Producto (ReactiveForm)</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      
+      <div class="row">
+        <div class="col-md-8 mb-3">
+          <label for="name" class="form-label">Nombre del Producto</label>
+          <input type="text" id="name" formControlName="name" class="form-control"
+                 [class.is-invalid]="f.name.invalid && f.name.touched">
+          
+          <div *ngIf="f.name.invalid && f.name.touched" class="invalid-feedback">
+            <span *ngIf="f.name.errors?.['required']">El nombre es obligatorio.</span>
+            <span *ngIf="f.name.errors?.['minlength']">Debe tener al menos 3 caracteres.</span>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+          <label for="price" class="form-label">Precio</label>
+          <input type="number" id="price" formControlName="price" class="form-control" step="0.01"
+                 [class.is-invalid]="f.price.invalid && f.price.touched">
+          
+          <div *ngIf="f.price.invalid && f.price.touched" class="invalid-feedback">
+            <span *ngIf="f.price.errors?.['required']">El precio es obligatorio.</span>
+            <span *ngIf="f.price.errors?.['min']">El precio debe ser mayor a 0.01.</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea id="description" formControlName="description" class="form-control" rows="3"
+                  [class.is-invalid]="f.description.invalid && f.description.touched"></textarea>
+                  
+        <div *ngIf="f.description.invalid && f.description.touched" class="invalid-feedback">
+          <span *ngIf="f.description.errors?.['required']">La descripción es obligatoria.</span>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-5 mb-3">
+          <label for="category" class="form-label">Categoría</label>
+          <select id="category" formControlName="category" class="form-select">
+            <option value="hombre">Hombre</option>
+            <option value="mujer">Mujer</option>
+            <option value="niño">Niño</option>
+          </select>
+          </div>
+
+        <div class="col-md-5 mb-3">
+          <label for="image" class="form-label">URL Imagen</label>
+          <input type="url" id="image" formControlName="image" class="form-control">
+        </div>
+        
+        <div class="col-md-2 mb-3 d-flex align-items-end">
+          <div class="form-check form-switch pb-1">
+            <input class="form-check-input" type="checkbox" role="switch" id="active" formControlName="active">
+            <label class="form-check-label" for="active">Activo</label>
+          </div>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-success mt-3" [disabled]="productForm.invalid">
+        <i class="bi bi-plus-circle-fill"></i> Crear Producto
+      </button>
+    </form>
+  </div>
+</div>
